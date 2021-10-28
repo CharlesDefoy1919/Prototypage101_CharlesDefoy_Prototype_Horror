@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+
+		//ref to the players' rigidbody
 		rbPLayer = this.GetComponent<Rigidbody>();
 
 	}
@@ -24,7 +26,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		//left and right
+		// control left and right
 
 		if (Input.GetKey(KeyCode.D))
 		{
@@ -44,7 +46,7 @@ public class PlayerController : MonoBehaviour
 		}
 		Debug.Log("Move Left");
 
-		//forward and backward
+		//control forward and backward
 
 		if (Input.GetKey(KeyCode.W))
 		{
@@ -81,6 +83,8 @@ public class PlayerController : MonoBehaviour
 
 
 	}
+
+	//makes sure the player is on ground befor letting it jump again (no double jump)
 
 	private void OnCollisionEnter(Collision collision)
 	{

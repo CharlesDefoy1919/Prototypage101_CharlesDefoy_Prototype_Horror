@@ -8,6 +8,8 @@ public class Unused : MonoBehaviour
 	public bool Croissant = true;
 	public int CrNbr = 0;
 
+	float CrsDelisious;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -42,11 +44,27 @@ public class Unused : MonoBehaviour
 
 
 			}
+
 		}
 
+		for (float CrsDelicious = 40; CrsDelicious >= 20; CrsDelicious -= 2)
+		{
+			Debug.Log("Croissant Deliciousness Factor " + CrsDelicious.ToString());
+
+			if (CrsDelicious == 20)
+			{
+				Debug.Log("Croissant Deliciousness back to normal");
+
+			}
 
 
 
+
+
+
+
+
+		}
 
 
 

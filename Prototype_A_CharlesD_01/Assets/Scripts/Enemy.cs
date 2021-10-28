@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
 
 	public LayerMask whatIsGround, whatIsPlayer;
 
+	public Vector3 playerpos;
+
+	GameObject ply;
+
 
 	//Patroling
 	public Vector3 walkPoint;
@@ -33,6 +37,7 @@ public class Enemy : MonoBehaviour
 		player = GameObject.Find("Player").transform;
 		agent = GetComponent<NavMeshAgent>();
 
+		ply = GameObject.FindGameObjectWithTag("Player");
 
 		//NavColRange = GetComponent<NavCollider>().Radius --- trying to get the walkpoint to be inside this collider so AI isnt to far from player
 
@@ -53,10 +58,18 @@ public class Enemy : MonoBehaviour
 			Debug.Log("Chasing");
 		}
 
+
+
+
+		playerpos = ply.transform.position;
+		// seems like the player.position isnt updating causing the bug where ai just lays down on initial player positon
+
+
 	}
 
+		//check if Ai in player Light range
 
-	private void OnTriggerEnter(Collider LightCol)  //check if Ai in player Light range
+	private void OnTriggerStay(Collider LightCol)  
 	{
 		playerInLightRange = true;
 
@@ -85,7 +98,7 @@ public class Enemy : MonoBehaviour
 
 		//WalkpointReached and distance between walkpoint
 
-		if (distanceToWalkPoint.magnitude < 8f)
+		if (distanceToWalkPoint.magnitude < 5f)
 			walkPointSet = false;
 
 
@@ -104,19 +117,26 @@ public class Enemy : MonoBehaviour
 
 	private void ChasePlayer()
 	{
-		// 
+		// Ai walkpoint is now the players position in other words it is now chasing you. + the Ai mesh turns towrads the player.
 
-		agent.SetDestination(player.position);
+		agent.SetDestination(playerpos);
 
 		transform.LookAt(player);
+
 	}
 
-	private void Exiting()
+	     /*private void Exiting()
 	{
+
+		// I made this function has a way to make the AI exit the light radius to test how the game would work the other way around ( Monster scared of light).
+
 		agent.SetDestination(walkPoint);
 
 		Debug.Log("Exiting");
-	}
 
-	#endregion
+	
+	}*/
+
+	#endregion 
+
 }

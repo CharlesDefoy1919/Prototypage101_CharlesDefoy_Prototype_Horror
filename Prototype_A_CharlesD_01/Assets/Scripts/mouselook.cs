@@ -11,11 +11,11 @@ public class mouselook : MonoBehaviour
 
 	float xRotation = 0f;
 
-	//public Quaternion PlayerPos = new Quaternion(0, 180, 0, 0);
-
 	// Start is called before the first frame update
 	void Start()
 	{
+		//makes sure the cursor is locked on camera when entering play mode
+
 		Cursor.lockState = CursorLockMode.Locked;
 
 	}
@@ -23,6 +23,8 @@ public class mouselook : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+
+
 		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
 		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
