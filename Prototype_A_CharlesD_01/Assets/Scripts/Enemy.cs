@@ -13,8 +13,6 @@ public class Enemy : MonoBehaviour
 
 	public LayerMask whatIsGround, whatIsPlayer;
 
-	public Vector3 playerpos;
-
 	GameObject ply;
 
 
@@ -45,23 +43,26 @@ public class Enemy : MonoBehaviour
 
 	private void Update()
 	{
-		
-		// Change function depending on lightrange condition
 
-		if (!playerInLightRange) Patroling();
+		// Change function depending on lightrange condition
+		if (playerInSightRange) Patroling();
 		{
 			Debug.Log("Patroling");
 		}
 
-		if (playerInLightRange) ChasePlayer();
+		if (playerInLightRange) Exiting();
+		{
+			Debug.Log("Exiting");
+		}
+
+		if (!playerInLightRange) ChasePlayer(ply.transform.position);
 		{
 			Debug.Log("Chasing");
 		}
 
 
 
-
-		playerpos = ply.transform.position;
+		
 		// seems like the player.position isnt updating causing the bug where ai just lays down on initial player positon
 
 
@@ -115,17 +116,17 @@ public class Enemy : MonoBehaviour
 			walkPointSet = true;
 	}
 
-	private void ChasePlayer()
+	private void ChasePlayer(Vector3 pos)
 	{
 		// Ai walkpoint is now the players position in other words it is now chasing you. + the Ai mesh turns towrads the player.
 
-		agent.SetDestination(playerpos);
+		agent.SetDestination(pos);
 
 		transform.LookAt(player);
 
 	}
 
-	     /*private void Exiting()
+	     private void Exiting()
 	{
 
 		// I made this function has a way to make the AI exit the light radius to test how the game would work the other way around ( Monster scared of light).
@@ -135,7 +136,7 @@ public class Enemy : MonoBehaviour
 		Debug.Log("Exiting");
 
 	
-	}*/
+	}
 
 	#endregion 
 

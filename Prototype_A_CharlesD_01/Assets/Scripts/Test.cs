@@ -11,12 +11,25 @@ public class Test : MonoBehaviour
     [SerializeField]
     private bool What = true;
 
+    private int[] mynum = { 0, 10, 3 };  
+
     #endregion
 
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Scene Started");
+
+        Debug.Log(multiply(5, 10));
+
+        
+
+        for (int i = 0; i < mynum.Length; i++)
+
+        { 
+        
+        Debug.Log(mynum[i]);  // position of array starts with 0--1,2,3
+        }
     }
 
     // Update is called once per frame
@@ -27,4 +40,31 @@ public class Test : MonoBehaviour
             Debug.Log("1st condition true");
         }
     }
+
+    #region Methods
+
+
+    // int multiply is a function ---- inside the parenthesis is a method
+
+    int multiply(int a, int b)
+    {
+        int result;
+
+        result = a * b;
+
+        return result;
+    }
+
+
+
+
+
+
+
+
+	#endregion
+
+
+
+
 }

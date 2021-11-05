@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WallLight : MonoBehaviour
 {
+	#region Variables
+
 	Light Lt;
 
 	float originalIntensity;
@@ -11,6 +13,8 @@ public class WallLight : MonoBehaviour
 	public bool LightOn = false;
 
 	public float lightintensity = 2000f;
+
+	#endregion
 
 	// Start is called before the first frame update
 	void Start()
