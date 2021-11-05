@@ -37,6 +37,8 @@ public class Enemy : MonoBehaviour
 
 		ply = GameObject.FindGameObjectWithTag("Player");
 
+		Debug.Log("Player: " + ply.gameObject.name);
+
 		//NavColRange = GetComponent<NavCollider>().Radius --- trying to get the walkpoint to be inside this collider so AI isnt to far from player
 
 	}
@@ -45,18 +47,22 @@ public class Enemy : MonoBehaviour
 	{
 
 		// Change function depending on lightrange condition
-		if (playerInSightRange) Patroling();
+		if (playerInSightRange) 
 		{
+			Patroling();
 			Debug.Log("Patroling");
 		}
 
-		if (playerInLightRange) Exiting();
-		{
+		if (playerInLightRange)
+		{ 
+			Exiting();
 			Debug.Log("Exiting");
 		}
 
-		if (!playerInLightRange) ChasePlayer(ply.transform.position);
+		if (!playerInLightRange)
 		{
+
+			ChasePlayer(ply.transform.position);
 			Debug.Log("Chasing");
 		}
 
@@ -70,7 +76,7 @@ public class Enemy : MonoBehaviour
 
 		//check if Ai in player Light range
 
-	private void OnTriggerStay(Collider LightCol)  
+	private void OnTriggerEnter(Collider LightCol)  
 	{
 		playerInLightRange = true;
 
@@ -120,9 +126,11 @@ public class Enemy : MonoBehaviour
 	{
 		// Ai walkpoint is now the players position in other words it is now chasing you. + the Ai mesh turns towrads the player.
 
-		agent.SetDestination(pos);
+		agent.SetDestination(ply.transform.position);
 
-		transform.LookAt(player);
+		Debug.Log(ply.transform.position);
+
+		//player.transform.positionLookAt(player);
 
 	}
 
