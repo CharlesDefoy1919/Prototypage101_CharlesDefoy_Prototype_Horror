@@ -14,6 +14,10 @@ public class Projectiles : MonoBehaviour
 
 	public float speed;
 
+	public float rotationspeed;
+
+	public float rotationspeedr;
+
 	//public Vector3 CamPos;
 
 	//private Vector3 CameraPos;
@@ -44,6 +48,9 @@ public class Projectiles : MonoBehaviour
 
 			var instance = Instantiate(projectile, flareSpawn.position, Quaternion.identity);
 			instance.GetComponent<Rigidbody>().AddForce((myCam.transform.forward * speed));
+			instance.GetComponent<Rigidbody>().AddTorque(transform.forward * rotationspeed);
+			instance.GetComponent<Rigidbody>().AddTorque(transform.right * rotationspeedr);
+			
 
 			//ProjectileThrow();
 		}

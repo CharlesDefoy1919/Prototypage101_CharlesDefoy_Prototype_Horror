@@ -12,6 +12,8 @@ public class Lantern : MonoBehaviour
 	CapsuleCollider LightCol;
 	float Radius;
 
+	public float Lightr = 3.0f;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -35,7 +37,7 @@ public class Lantern : MonoBehaviour
 		if ((Lt.range <= 30) && Input.GetKeyDown(KeyCode.E))
 		{
 
-			Lt.range += 3;
+			Lt.range += Lightr;
 
 			Debug.Log("Expend_Light");
 		}
@@ -46,7 +48,7 @@ public class Lantern : MonoBehaviour
 		if (Input.GetKeyDown(KeyCode.Q))
 		{
 
-			Lt.range -= 3;
+			Lt.range -= Lightr;
 
 			Debug.Log("Retract_Light");
 		}
