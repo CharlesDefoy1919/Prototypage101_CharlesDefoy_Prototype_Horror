@@ -9,11 +9,12 @@ TagManager:
   - LantHand
   - Ground
   - 'Enemy '
+  - Flare
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - What Is Player
+  - whatIsPlayer
   - Water
   - UI
   - What Is Wall

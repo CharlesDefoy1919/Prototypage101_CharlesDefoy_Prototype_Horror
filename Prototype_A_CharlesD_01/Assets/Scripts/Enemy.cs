@@ -25,7 +25,7 @@ public class Enemy : MonoBehaviour
 	//States
 	public float SightRange;
 	public bool playerInSightRange;
-	public bool playerInLightRange;
+	public bool EnemyInLightRange;
 	
 
 	private Collider playerCollider;
@@ -36,12 +36,10 @@ public class Enemy : MonoBehaviour
 
 	private void Awake()
 	{
-		player = GameObject.Find("Player").transform;
+		player = GameObject.FindGameObjectWithTag("Player").transform;
 		agent = GetComponent<NavMeshAgent>();
 
-		ply = GameObject.FindGameObjectWithTag("Player");
-
-		Debug.Log("Player: " + ply.gameObject.name);
+		//ply = GameObject.FindGameObjectWithTag("Player");
 
 		//NavColRange = GetComponent<NavCollider>().Radius --- trying to get the walkpoint to be inside this collider so AI isnt to far from player
 	}
@@ -49,44 +47,45 @@ public class Enemy : MonoBehaviour
 	private void Update()
 	{
 
+		playerInSightRange = Physics.CheckSphere(transform.position, SightRange, whatIsPlayer);
+
+
 		// Change function depending on lightrange condition
-		if (playerInSightRange)
+		if (!playerInSightRange)
 		{
 			Patroling();
 			Debug.Log("Patroling");
 		}
 
-		if (playerInLightRange)
+		if (EnemyInLightRange)
 		{
-			Exiting();
+			
+
 			Debug.Log("Exiting");
 		}
 
-		if (!playerInLightRange)
+		if (playerInSightRange)
 		{
-
-			ChasePlayer(ply.transform.position);
+			ChasePlayer(player.position);
 			Debug.Log("Chasing");
 		}
 
-
+		
 		
 
 	}
 
 	//check if Ai in player Light range
 
-	private void OnTriggerEnter(Collider collider)
+	private void OnTriggerEnter(Collider other)
 	{
-		playerInLightRange = true;
-
+		EnemyInLightRange = true;
 	}
 
 	
-	private void OnTriggerExit(Collider collider)
+	private void OnTriggerExit(Collider other)
 	{
-		playerInLightRange = false;
-
+		EnemyInLightRange = false;
 	}
 
 	 
@@ -129,7 +128,14 @@ public class Enemy : MonoBehaviour
 	{
 		// Ai walkpoint is now the players position in other words it is now chasing you. + the Ai mesh turns towards the player.
 
-		agent.SetDestination(ply.transform.position);
+		agent.SetDestination(player.position);
+
+		if (EnemyInLightRange)
+		{
+			Patroling();
+
+		}
+			
 
 		//player.transform.positionLookAt(player);
 
@@ -139,6 +145,8 @@ public class Enemy : MonoBehaviour
 	{
 
 		// I made this function has a way to make the AI exit the light radius to test how the game would work the other way around ( Monster scared of light).
+
+		
 
 		agent.SetDestination(walkPoint);
 

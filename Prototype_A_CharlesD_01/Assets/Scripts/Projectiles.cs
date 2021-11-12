@@ -35,7 +35,7 @@ public class Projectiles : MonoBehaviour
 		}
 	}
 
-	void ProjectileThrow()
+	public void ProjectileThrow()
 	{
 		var instance = Instantiate(projectile, flareSpawn.position, Quaternion.identity);
 		instance.GetComponent<Rigidbody>().AddForce((myCam.transform.forward * speed));
