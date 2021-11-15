@@ -9,43 +9,32 @@ public class Map : MonoBehaviour
 	public float MapHeightUp = 2;
 	public float MapHeightDown = -2;
 
+	public Component Mrender;
+
 	#endregion
 
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		//mrender = GetComponent<MeshRenderer>(); ------ I'm trying to make the object disappear
-
+		Mrender = GetComponent<MeshRenderer>(); 
 	}
 	// Update is called once per frame
 	void Update()
 	{
 		// Map positon up to appear on screen gradually
-
-		if (Input.GetKeyDown(KeyCode.M) && transform.position.y != 2)
+		if(Input.GetKeyDown(KeyCode.M))
 		{
-			transform.position = new Vector3(gameObject.transform.position.x, MapHeightUp, gameObject.transform.position.z);
+			if (gameObject.GetComponent<MeshRenderer>() != null)
+			{
+				//gameObject.GetComponent<MeshRenderer>() = null;
 
-			Debug.Log("Map Appeared");
+				Debug.Log("Map Appeared");
+			}
 		}
-
-
-
-		// if "m" is pressed again while map is showed hide it
-
-		else if (Input.GetKeyDown(KeyCode.M))
-		{
-			transform.position = new Vector3(gameObject.transform.position.x, MapHeightDown, gameObject.transform.position.z);
-
-			Debug.Log("Map Disappeared");
-		}
-
-		// code works when you spam "M" Im not sure I unserstand...
-
 	}
-
 }
+
 
 
 

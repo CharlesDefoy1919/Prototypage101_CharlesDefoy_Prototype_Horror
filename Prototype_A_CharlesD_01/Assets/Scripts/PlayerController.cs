@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
 
 	public bool IsJumping = false;
 
+	public float SpeedSlide = 30f;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -80,7 +82,16 @@ public class PlayerController : MonoBehaviour
 
 		}
 
+		if (Input.GetKeyDown(KeyCode.LeftShift))
+		{
+			if (!IsJumping)
+			{
+				
 
+				transform.Translate(Vector3.forward * SpeedSlide * Time.deltaTime);
+			}
+
+		}
 
 	}
 
