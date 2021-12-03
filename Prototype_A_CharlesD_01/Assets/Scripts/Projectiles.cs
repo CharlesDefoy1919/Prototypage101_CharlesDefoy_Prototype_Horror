@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Projectiles : MonoBehaviour
 {
@@ -18,16 +19,13 @@ public class Projectiles : MonoBehaviour
 
 	public Transform flareSpawn;
 
-	public bool ProjectileThrown;
-
-	Light Lt;
-
-	float Radius;
-
-	float originalRange;
-
 	public float lightr = 0.1f;
 
+	public int nbrOfFlares;
+
+	public Text flareNbr;
+
+	private Text fn;
 
 	#endregion
 
@@ -35,43 +33,42 @@ public class Projectiles : MonoBehaviour
 	void Start()
 	{
 		myCam = transform.parent.GetComponentInChildren<Camera>();
+
+		nbrOfFlares = 1;
+
+		fn = flareNbr.GetComponent<Text>();
 	}
-
-
-
 
 	// Update is called once per frame
 	void Update()
 	{
+		// shows int on canvas (UI)
+		fn.text = nbrOfFlares.ToString();
+			
+		//left click throws projectiles
 		if (Input.GetKeyDown(KeyCode.Mouse0))
 		{
-			ProjectileThrow();
-		}
-
-
-		if (ProjectileThrown)
-		{
-
-			if (projectile)  // couroutine?
+			//restricted by number of picked up item
+			if (nbrOfFlares >= 1)
 			{
-				Lt = projectile.GetComponentInChildren<Light>();
-				originalRange = Lt.range;
-
-				Lt.range -= lightr;
-
-				Debug.Log("Flare_Dim");
+				ProjectileThrow();
 			}
 		}
 	}
 
+	// throw function
 	public void ProjectileThrow()
 	{
+
+		//insantiate and forces
 		var instance = Instantiate(projectile, flareSpawn.position, Quaternion.identity);
 		instance.GetComponent<Rigidbody>().AddForce((myCam.transform.forward * speed));
 		instance.GetComponent<Rigidbody>().AddTorque(transform.forward * rotationspeed);
 		instance.GetComponent<Rigidbody>().AddTorque(transform.right * rotationspeedr);
 
-		ProjectileThrown = true;
-
+		//lose one projectile
+		nbrOfFlares -= 1;
 	}
 }
+	
+	

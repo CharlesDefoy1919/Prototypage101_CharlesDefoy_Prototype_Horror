@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDeath : MonoBehaviour
+public class playerDeath : MonoBehaviour
 {
+	#region Variables
 
 	public bool playerDefeated = false;
-	public GameObject Enemy;
 
-	private Collider Enemycol;
+	GameObject player;
 
+	#endregion
 	// Start is called before the first frame update
 	void Start()
 	{
-		Enemycol = Enemy.GetComponent<Collider>();
+		player = GameObject.FindGameObjectWithTag("Player");
 	}
 
 	// Update is called once per frame
@@ -27,8 +28,7 @@ public class PlayerDeath : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-
-		if (other = Enemycol)
+		if (other.gameObject.tag == "Player")
 		{
 			playerDefeated = true;
 		}
@@ -36,7 +36,7 @@ public class PlayerDeath : MonoBehaviour
 
 	private void Defeated()
 	{
-		Destroy(gameObject);
+		Destroy(player);
 
 		Debug.Log("Defeated");
 	}

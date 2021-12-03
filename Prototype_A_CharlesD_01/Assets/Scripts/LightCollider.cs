@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LightCollider : MonoBehaviour
+public class lightCollider : MonoBehaviour
 {
     Light Lt;
     float originalRange;
-    LightCollider LightCol;
+    lightCollider LightCol;
     float Radius;
 
 
@@ -17,7 +17,7 @@ public class LightCollider : MonoBehaviour
         Lt = GetComponent<Light>();
         originalRange = Lt.range;
 
-        LightCol = GetComponent<LightCollider>();
+        LightCol = GetComponent<lightCollider>();
         Radius = LightCol.Radius;
 
     }

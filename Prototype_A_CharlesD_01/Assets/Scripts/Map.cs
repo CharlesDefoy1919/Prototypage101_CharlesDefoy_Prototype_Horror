@@ -9,7 +9,14 @@ public class Map : MonoBehaviour
 	public float MapHeightUp = 2;
 	public float MapHeightDown = -2;
 
-	public Component Mrender;
+	private MeshRenderer mRender;
+
+	private MeshRenderer bRender;
+
+	public GameObject map;
+
+	public GameObject Boussole;
+
 
 	#endregion
 
@@ -17,7 +24,9 @@ public class Map : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		Mrender = GetComponent<MeshRenderer>(); 
+		mRender = map.GetComponentInChildren<MeshRenderer>();
+
+		bRender = Boussole.GetComponentInChildren<MeshRenderer>();
 	}
 	// Update is called once per frame
 	void Update()
@@ -25,13 +34,34 @@ public class Map : MonoBehaviour
 		// Map positon up to appear on screen gradually
 		if(Input.GetKeyDown(KeyCode.M))
 		{
-			if (gameObject.GetComponent<MeshRenderer>() != null)
-			{
-				//gameObject.GetComponent<MeshRenderer>() = null;
-
-				Debug.Log("Map Appeared");
-			}
+			MapAppears();
 		}
+
+		if (Input.GetKeyDown(KeyCode.B))
+		{
+			BoussoleAppears();
+		}
+
+		if (mRender.enabled && Input.GetKeyDown(KeyCode.B))
+		{
+			BoussoleAppears();
+		}
+
+		if (bRender.enabled && Input.GetKeyDown(KeyCode.M))
+		{
+			MapAppears();
+		}
+
+	}
+
+	void MapAppears()
+	{
+		mRender.enabled = !mRender.enabled;
+	}
+
+	void BoussoleAppears()
+	{
+		bRender.enabled = !bRender.enabled;
 	}
 }
 

@@ -13,6 +13,30 @@ using UnityEngine;
 - fill Unsuded script with other operators and variables (For) Done
 - fix bug where AI just dies when he goes in room --- clearly an issue with the player.position update
 
+- if player runs out of fuel the enemy starts chasing
+- flare color change and particle  %
+- player death   %
+- fuel and pickup (Jay)
+- UI  %
+- boussole  next
+- map et boussole texture
+- LD
+- flare destroy with Timer plugin
+- General CleanUp 1/2 %
+- Rename scripts  %
+- key and door   %
+
+
+- Door prompt disapear  
+- Flare amount restrict + UI nbr   %
+- LD
+- Compass
+- Fuel  almost %
+- Exit + more doors and keys  
+
+- understand for loop
+- Collectible plug in for jay
+
 
 
 

@@ -15,6 +15,14 @@ public class Enemy : MonoBehaviour
 
 	GameObject ply;
 
+	//Material
+
+	public Material MaterialEyes01;
+	public Material MaterialEyes02;
+
+	public GameObject Eyes;
+	public GameObject Eyes02;
+
 
 	//Patroling
 	public Vector3 walkPoint;
@@ -38,6 +46,7 @@ public class Enemy : MonoBehaviour
 	{
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		agent = GetComponent<NavMeshAgent>();
+
 
 		//ply = GameObject.FindGameObjectWithTag("Player");
 
@@ -69,10 +78,6 @@ public class Enemy : MonoBehaviour
 			ChasePlayer(player.position);
 			Debug.Log("Chasing");
 		}
-
-		
-		
-
 	}
 
 	//check if Ai in player Light range
@@ -110,6 +115,11 @@ public class Enemy : MonoBehaviour
 		if (distanceToWalkPoint.magnitude < 5f)
 			walkPointSet = false;
 
+		//Mat
+
+		Eyes.GetComponent<MeshRenderer>().material = MaterialEyes01;
+		Eyes02.GetComponent<MeshRenderer>().material = MaterialEyes01;
+
 
 	}
 
@@ -129,6 +139,9 @@ public class Enemy : MonoBehaviour
 		// Ai walkpoint is now the players position in other words it is now chasing you. + the Ai mesh turns towards the player.
 
 		agent.SetDestination(player.position);
+
+		Eyes.GetComponent<MeshRenderer>().material = MaterialEyes02;
+		Eyes02.GetComponent<MeshRenderer>().material = MaterialEyes02;
 
 		if (EnemyInLightRange)
 		{

@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Lantern : MonoBehaviour
 {
-	float duration = 3.0f;
+	//float duration = 3.0f;
 	float originalRange;
 
-	Light Lt;
+	public Light Lt;
 
 	CapsuleCollider LightCol;
 	float Radius;
 
 	public float Lightr = 3.0f;
+
+	public JayScript FuelScript;
+
+	public float LanternSpeed = 1;
+
+	public bool OutofFuel;
+
+	private bool canTake = false;
 
 	// Start is called before the first frame update
 	void Start()
@@ -26,32 +34,52 @@ public class Lantern : MonoBehaviour
 		LightCol = GetComponent<CapsuleCollider>();
 		Radius = LightCol.radius;
 
+
+		FuelScript = GameObject.Find("PlayerReal").GetComponent<JayScript>();
+
+
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 
-		//let's the player expend the radius of the light up to a maximum of 30
-
-		if ((Lt.range <= 30) && Input.GetKeyDown(KeyCode.E))
+		if (FuelScript.CurrentBar >= 0)
 		{
-
-			Lt.range += Lightr;
-
-			Debug.Log("Expend_Light");
+			OutofFuel = false;
 		}
 
 
-		//let's the player decrease the light radius
-
-		if (Input.GetKeyDown(KeyCode.Q))
+		if (FuelScript.CurrentBar <= 0)
 		{
+			Lt.range = 0;
 
-			Lt.range -= Lightr;
-
-			Debug.Log("Retract_Light");
+			OutofFuel = true;
 		}
+
+
+		if (OutofFuel == false)
+		{
+			//let's the player expend the radius of the light up to a maximum of 30
+
+			if ((Lt.range <= 30) && Input.GetKeyDown(KeyCode.E))
+			{
+				Lt.range += Lightr;
+
+				Debug.Log("Expend_Light");
+			}
+
+			//let's the player decrease the light radius
+
+			if (Input.GetKeyDown(KeyCode.Q))
+			{
+
+				Lt.range -= Lightr;
+
+				Debug.Log("Retract_Light");
+			}
+		}
+
 
 		//the light radius matches the collider 
 
