@@ -12,6 +12,7 @@ TagManager:
   - Flare
   - Key
   - Collectible
+  - Exit
   layers:
   - Default
   - TransparentFX
